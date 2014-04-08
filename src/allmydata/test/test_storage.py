@@ -2887,7 +2887,7 @@ class ServerWithNullBackend(ServiceParentMixin, WorkdirMixin, ServerMixin, unitt
         return d
 
 
-class WithMockCloudBackend(ServiceParentMixin, WorkdirMixin):
+class WithCloudBackendAndMockContainer(ServiceParentMixin, WorkdirMixin):
     def create(self, name, detached=False, readonly=False, reserved_space=0, klass=StorageServer):
         assert not readonly
         workdir = self.workdir(name)
@@ -2930,7 +2930,7 @@ class WithDiskBackend(ServiceParentMixin, WorkdirMixin):
         return MutableDiskShare
 
 
-class ServerWithMockCloudBackend(WithMockCloudBackend, ServerTest, unittest.TestCase):
+class ServerWithCloudBackendAndMockContainer(WithCloudBackendAndMockContainer, ServerTest, unittest.TestCase):
     def setUp(self):
         ServiceParentMixin.setUp(self)
 
@@ -3308,7 +3308,7 @@ class ServerWithDiskBackend(WithDiskBackend, ServerTest, unittest.TestCase):
         return d
 
 
-class MutableServerWithMockCloudBackend(WithMockCloudBackend, MutableServerTest, unittest.TestCase):
+class MutableServerWithCloudBackendAndMockContainer(WithCloudBackendAndMockContainer, MutableServerTest, unittest.TestCase):
     def setUp(self):
         ServiceParentMixin.setUp(self)
 
@@ -5465,7 +5465,7 @@ class AccountingCrawlerWithDiskBackend(WithDiskBackend, AccountingCrawlerTest, u
     pass
 
 
-#class AccountingCrawlerWithMockCloudBackend(WithMockCloudBackend, AccountingCrawlerTest, unittest.TestCase):
+#class AccountingCrawlerWithCloudBackendAndMockContainer(WithCloudBackendAndMockContainer, AccountingCrawlerTest, unittest.TestCase):
 #    pass
 
 
@@ -5597,7 +5597,7 @@ class WebStatusWithDiskBackend(WithDiskBackend, WebRenderingMixin, unittest.Test
         self.failUnlessEqual(remove_prefix("foo.bar", "baz."), None)
 
 
-class WebStatusWithMockCloudBackend(WithMockCloudBackend, WebRenderingMixin, unittest.TestCase):
+class WebStatusWithCloudBackendAndMockContainer(WithCloudBackendAndMockContainer, WebRenderingMixin, unittest.TestCase):
     def test_status(self):
         server = self.create("test_status")
 
