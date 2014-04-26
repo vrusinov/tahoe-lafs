@@ -4,6 +4,7 @@ import re, errno, subprocess, os
 from twisted.trial import unittest
 
 from allmydata.util import iputil
+from allmydata.util.namespace import Namespace
 import allmydata.test.common_util as testutil
 from allmydata.util.namespace import Namespace
 
