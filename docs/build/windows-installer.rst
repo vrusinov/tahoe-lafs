@@ -37,11 +37,11 @@ Download and install the latest OpenSSL version
 
 * Download the latest OpenSSL from `the OpenSSL source download page`_.
 * Untar it.
-* Invoke ``"C:\Users\UserName\AppData\Local\Programs\Common\Microsoft\Visual C++ for Python\9.0\vcvarsall.bat" x86_amd64``
+* Invoke ``"C:\Users\UserName\AppData\Local\Programs\Common\Microsoft\Visual C++ for Python\9.0\vcvarsall.bat" amd64``
 * Go to the untar'ed openssl source base directory and run the following commands.
 * ``mkdir c:\dist``
 * ``perl Configure VC-WIN64A --prefix=c:\dist\openssl64 no-asm enable-tlsext``
-* ``ms\do_win64a.mak``
+* ``ms\do_win64a.bat``
 * ``nmake -f ms\ntdll.mak``
 * ``nmake -f ms\ntdll.mak install``
 
