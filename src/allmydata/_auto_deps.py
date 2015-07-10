@@ -54,6 +54,7 @@ install_requires = [
 
     # needed for cloud backend
     "txAWS == 0.2.1.post5",
+    "oauth2client == 1.1.0",
     "python-dateutil",
 
     "six >= 1.4.1",             # latest cryptography depends on this version; txAWS also depends on six
@@ -80,6 +81,7 @@ package_imports = [
     ('characteristic',   'characteristic'),
     ('pyasn1-modules',   'pyasn1_modules'),
     ('txAWS',            'txaws'),
+    ('oauth2client',     'oauth2client'),
     ('python-dateutil',  'dateutil'),
     ('six',              'six'),
 ]
