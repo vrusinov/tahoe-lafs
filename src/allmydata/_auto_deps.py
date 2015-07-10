@@ -54,6 +54,12 @@ install_requires = [
     "characteristic >= 14.0.0", # latest service-identity depends on this version
     "pyasn1 >= 0.1.4",          # latest pyasn1-modules depends on this version
     "pyasn1-modules >= 0.0.5",  # service-identity depends on this
+
+    # needed for cloud backend
+    "txAWS == 0.2.1.post5",
+    "python-dateutil",
+
+    "six >= 1.4.1",             # latest cryptography depends on this version; txAWS also depends on six
 ]
 
 # Includes some indirect dependencies, but does not include allmydata.
@@ -77,6 +83,9 @@ package_imports = [
     ('service-identity', 'service_identity'),
     ('characteristic',   'characteristic'),
     ('pyasn1-modules',   'pyasn1_modules'),
+    ('txAWS',            'txaws'),
+    ('python-dateutil',  'dateutil'),
+    ('six',              'six'),
 ]
 
 # Dependencies for which we don't know how to get a version number at run-time.
@@ -211,7 +220,6 @@ if _can_use_pyOpenSSL_0_14:
         #
         "cryptography",
         "cffi >= 0.8",          # latest cryptography depends on this version
-        "six >= 1.4.1",         # latest cryptography depends on this version
         "enum34",               # latest cryptography depends on this
         "pycparser",            # cffi depends on this
     ]
@@ -219,7 +227,6 @@ if _can_use_pyOpenSSL_0_14:
     package_imports += [
         ('cryptography',     'cryptography'),
         ('cffi',             'cffi'),
-        ('six',              'six'),
         ('enum34',           'enum'),
         ('pycparser',        'pycparser'),
     ]
