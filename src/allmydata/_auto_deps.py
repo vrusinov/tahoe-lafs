@@ -122,6 +122,8 @@ if not hasattr(sys, 'frozen'):
 #   rekeying bug <https://twistedmatrix.com/trac/ticket/4395>
 # * The FTP frontend depends on Twisted >= 11.1.0 for
 #   filepath.Permissions
+# * The cloud backend depends on Twisted 12.1.0 for HTTPConnectionPool.
+# * IPv6 support will also depend on Twisted 12.1.0.
 #
 # On Windows, Twisted >= 12.2.0 has a dependency on pywin32.
 # Since pywin32 can only be installed manually, we fall back to
@@ -159,7 +161,7 @@ if sys.platform == "win32":
 
 if _use_old_Twisted_and_Nevow:
     install_requires += [
-        "Twisted >= 11.1.0, <= 12.1.0",
+        "Twisted == 12.1.0",
         "Nevow >= 0.9.33, <= 0.10",
     ]
     setup_requires += [req for req in install_requires if req.startswith('Twisted')
