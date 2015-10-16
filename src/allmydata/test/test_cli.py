@@ -627,6 +627,10 @@ class Help(unittest.TestCase):
         help = str(admin.DerivePubkeyOptions())
         self.failUnlessIn(" [global-options] admin derive-pubkey", help)
 
+    def test_create_admin_create_container(self):
+        help = str(admin.CreateContainerOptions())
+        self.failUnlessIn(" [global-options] admin create-container [NODEDIR]", help)
+
 
 class Ln(GridTestMixin, CLITestMixin, unittest.TestCase):
     def _create_test_file(self):
