@@ -3,12 +3,13 @@ from twisted.python import usage
 from allmydata.scripts.common import BaseOptions
 
 class GenerateKeypairOptions(BaseOptions):
+    def getSynopsis(self):
+        return "Usage: %s [global-options] admin generate-keypair" % (self.command_name,)
 
     def getUsage(self, width=None):
         t = BaseOptions.getUsage(self, width)
         t += """
-Generate a public/private keypair, dumped to stdout as two lines of ASCII..
-
+Generate a public/private keypair, dumped to stdout as two lines of ASCII.
 """
         return t
 
@@ -24,14 +25,13 @@ class DerivePubkeyOptions(BaseOptions):
         self.privkey = privkey
 
     def getSynopsis(self):
-        return "Usage: tahoe [global-options] admin derive-pubkey PRIVKEY"
+        return "Usage: %s [global-options] admin derive-pubkey PRIVKEY" % (self.command_name,)
 
     def getUsage(self, width=None):
         t = BaseOptions.getUsage(self, width)
         t += """
 Given a private (signing) key that was previously generated with
 generate-keypair, derive the public key and print it to stdout.
-
 """
         return t
 
