@@ -156,7 +156,12 @@ if sys.platform == "win32":
 
 if _use_old_Twisted_and_Nevow:
     install_requires += [
-        "Twisted >= 11.1.0, <= 12.1.0",
+        # * The cloud backend depends on Twisted 12.1.0 for HTTPConnectionPool.
+        # * IPv6 support will also depend on Twisted 12.1.0.
+        # * We don't want Twisted >= 12.2.0 to avoid a dependency of its endpoints
+        #   code on pywin32. <https://tahoe-lafs.org/trac/tahoe-lafs/ticket/2028>
+        #
+        "Twisted == 12.1.0",
         "Nevow >= 0.9.33, <= 0.10",
     ]
     setup_requires += [req for req in install_requires if req.startswith('Twisted')
