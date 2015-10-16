@@ -5548,14 +5548,25 @@ class WebStatusWithDiskBackend(WithDiskBackend, WebRenderingMixin, unittest.Test
         free_for_nonroot = 3*GB
         reserved         = 1*GB
 
-        server = self.create("test_status_right_disk_stats", reserved_space=GB)
+        server = self.create("test_status_right_disk_stats", reserved_space=reserved)
         expecteddir = server.backend._sharedir
+
+        def call_get_disk_stats(whichdir, reserved_space=0):
+            self.failUnlessEqual(whichdir, expecteddir)
+            self.failUnlessEqual(reserved_space, reserved)
+            used = total - free_for_root
+            avail = max(free_for_nonroot - reserved_space, 0)
+            return {
+              'total': total,
+              'free_for_root': free_for_root,
+              'free_for_nonroot': free_for_nonroot,
+              'used': used,
+              'avail': avail,
+           }
+        self.patch(fileutil, 'get_disk_stats', call_get_disk_stats)
 
         w = StorageStatus(server)
         html = w.renderSynchronously()
-
-        self.failIf([True for args in mock_get_disk_stats.call_args_list if args != ((expecteddir, reserved_space), {})],
-                    (mock_get_disk_stats.call_args_list, expecteddir, reserved_space))
 
         self.failUnlessIn("<h1>Storage Server Status</h1>", html)
         s = remove_tags(html)
