@@ -1,5 +1,8 @@
 sudo: false
-language: python
+os:
+  - "linux"
+  - "osx"
+#language: python
 cache: pip
 before_cache:
   - rm -f $HOME/.cache/pip/log/debug.log
@@ -14,6 +17,7 @@ before_install:
   - python misc/build_helpers/show-tool-versions.py
 install:
   - pip install coverage coveralls
+  - if [ "${TRAVIS_OS_NAME}" = "osx" ]; then brew update; brew install python; export PATH=/usr/local/bin:$PATH; fi
 before_script:
   - pip install -e .
 script:
