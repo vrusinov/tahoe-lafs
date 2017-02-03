@@ -1,5 +1,10 @@
+"""/status/ page handling code.
 
-import pprint, itertools, hashlib
+E.g. http://localhost:3456/status/ and its sub-pages.
+"""
+
+import pprint
+import itertools, hashlib
 import simplejson
 from twisted.internet import defer
 from nevow import rend, inevow, tags as T
@@ -392,13 +397,14 @@ class DownloadStatusPage(DownloadResultsRendererMixin, rend.Page):
         """
 
         serverid_to_group = {}
-        groupnum_to_rows = {} # maps groupnum to a table of rows. Each table
-                              # is a list with an element for each row number
-                              # (int starting from 0) that contains a
-                              # finish_time, indicating that the row is empty
-                              # beyond that time. If finish_time is None, it
-                              # indicate a response that has not yet
-                              # completed, so the row cannot be reused.
+
+        # Maps groupnum to a table of rows. Each table is a list with an
+        # element for each row number (int starting from 0) that contains a
+        # finish_time, indicating that the row is empty beyond that time. If
+        # finish_time is None, it indicate a response that has not yet
+        # completed, so the row cannot be reused.
+        groupnum_to_rows = {}
+
         new_events = []
         for ev in events:
             # DownloadStatus promises to give us events in temporal order
